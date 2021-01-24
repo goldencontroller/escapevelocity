@@ -48,28 +48,28 @@ scrollscreen.style.opacity = "1";
 scrollscreen_fake.style.opacity = "1";
 
 document.addEventListener("keydown", function(e) {
-    keysmap[e.keyCode] = true;
+    keysmap[e.key] = true;
 });
 document.addEventListener("keyup", function(e) {
-    keysmap[e.keyCode] = false;
+    keysmap[e.key] = false;
 });
 
 function main() {
 
     if (aiming == 1) {
-        if (keysmap[38] && getcoords(scope)[1] < getcoords(player)[1] + 12.5) {
+        if (keysmap.ArrowUp && getcoords(scope)[1] < getcoords(player)[1] + 12.5) {
             scope.changeYpos(0.1);
         }
-        if (keysmap[37] && getcoords(scope)[0] > getcoords(player)[0] - 12.5) {
+        if (keysmap.ArrowLeft && getcoords(scope)[0] > getcoords(player)[0] - 12.5) {
             scope.changeXpos(-0.1);
         }
-        if (keysmap[39] && getcoords(scope)[0] < getcoords(player)[0] + 12.5) {
+        if (keysmap.ArrowRight && getcoords(scope)[0] < getcoords(player)[0] + 12.5) {
             scope.changeXpos(0.1);
         }
-        if (keysmap[40] && getcoords(scope)[1] > getcoords(player)[1] - 12.5) {
+        if (keysmap.ArrowDown && getcoords(scope)[1] > getcoords(player)[1] - 12.5) {
             scope.changeYpos(-0.1);
         }
-        if (keysmap[88]) {
+        if (keysmap.x) {
             aiming = 0;
             velocity_up = (getcoords(scope)[1] - getcoords(player)[1]) / 40;
             velocity_right = (getcoords(scope)[0] - getcoords(player)[0]) / 90;
@@ -104,6 +104,9 @@ function main() {
             endscreen.style.opacity = "0";
             setTimeout(function() {
                 gamescreen.innerHTML = "";
+                startscreen = DOMgame.newSpritePiece(gamescreen, 100, 100, 50, 50, "displayscreens.jpg", 100, 400, 0, 0);
+                startscreen.style.animation = "fadein 1s";
+                document.addEventListener("keydown", keyfunc);
                 mainmenu();
             }, 5500);
         }, 2500);
