@@ -47,13 +47,16 @@ scrollscreen_fake.style.animation = "fadein 2s";
 scrollscreen.style.opacity = "1";
 scrollscreen_fake.style.opacity = "1";
 
+document.addEventListener("keydown", function(e) {
+    keysmap[e.keyCode] = true;
+});
+document.addEventListener("keyup", function(e) {
+    keysmap[e.keyCode] = false;
+});
+
 function main() {
 
     if (aiming == 1) {
-        onkeydown = onkeyup = function(e){
-            e = e || event;
-            keysmap[e.keyCode] = e.type == 'keydown';
-        }
         if (keysmap[38] && getcoords(scope)[1] < getcoords(player)[1] + 12.5) {
             scope.changeYpos(0.1);
         }
