@@ -74,6 +74,7 @@ function main() {
             scopebox.remove();
             scope.remove();
             timegap = 0;
+            SFX.playsound("sounds/launch.wav");
         }
     }
     else {

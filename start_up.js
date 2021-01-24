@@ -2,7 +2,7 @@ logoimage = DOMgame.newImgPiece(gamescreen, 100, 100, 50, 50, "logoimage.jpg");
 logoimage.style.opacity = "0";
 logoimage.style.animation = "fadeinout 5s";
 count = 0;
-keyfunc = function(){ k = event.key; };
+keyfunc = function(){ k = event.key; SFX.playsound("sounds/select.wav"); };
 k = "";
 selection = 0;
 var startscreen;

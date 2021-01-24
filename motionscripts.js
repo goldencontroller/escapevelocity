@@ -39,6 +39,7 @@ function detect_sensing() {
             else if (out.touching_block_right) {
                 out.touching_spring_right = true;
             }
+            SFX.playsound("sounds/bounce.wav");
         }
         if (block.dataset.type == "moving" && (velocity_right > -0.01 && velocity_right < 0.01) && thecollision == "top") {
             block.dataset.type = "normal";
@@ -121,6 +122,7 @@ function launch_script() {
                 }
             }
             else {
+                SFX.playsound("sounds/thud.wav");
                 velocity_right = 0
                 setTimeout(function() {
                     if (!(player.rectCollision(document.getElementById("exit")))) {
