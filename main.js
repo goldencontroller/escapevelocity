@@ -92,7 +92,15 @@ function main() {
     scrollscreen_fake.setYpos(250 - getcoords(player)[1]);
 
     if (areyawinningson) {
-        //win i guess
+        scrollscreen.style.animation = "fadeout 2s";
+        scrollscreen_fake.style.animation = "fadeout 2s";
+        scrollscreen.style.opacity = "0";
+        scrollscreen_fake.style.opacity = "0";
+        setTimeout(function() {
+            scrollscreen.remove();
+            scrollscreen_fake.remove();
+            endscreen = DOMgame.newSpritePiece(gamescreen, 100, 100, 50, 50, "displayscreens.jpg", 100, 400, -300, 0);
+        }, 2500);
     } else {
         setTimeout(main, 1);
     }
