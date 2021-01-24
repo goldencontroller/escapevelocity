@@ -100,6 +100,12 @@ function main() {
             scrollscreen.remove();
             scrollscreen_fake.remove();
             endscreen = DOMgame.newSpritePiece(gamescreen, 100, 100, 50, 50, "displayscreens.jpg", 100, 400, -300, 0);
+            endscreen.style.animation = "fadeinout 5s";
+            endscreen.style.opacity = "0";
+            setTimeout(function() {
+                gamescreen.innerHTML = "";
+                mainmenu();
+            }, 5500);
         }, 2500);
     } else {
         setTimeout(main, 1);
