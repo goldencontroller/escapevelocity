@@ -47,12 +47,10 @@ scrollscreen_fake.style.animation = "fadein 2s";
 scrollscreen.style.opacity = "1";
 scrollscreen_fake.style.opacity = "1";
 
-document.addEventListener("keydown", function(e) {
-    keysmap[e.key] = true;
-});
-document.addEventListener("keyup", function(e) {
-    keysmap[e.key] = false;
-});
+keydownlistener = function(e) { keysmap[e.key] = true; }
+keyuplistener = function(e) { keysmap[e.key] = false; };
+document.addEventListener("keydown", keydownlistener);
+document.addEventListener("keyup", keyuplistener);
 
 function main() {
 
@@ -102,6 +100,8 @@ function main() {
             endscreen = DOMgame.newSpritePiece(gamescreen, 100, 100, 50, 50, "displayscreens.jpg", 100, 400, -300, 0);
             endscreen.style.animation = "fadeinout 5s";
             endscreen.style.opacity = "0";
+            document.removeEventListener("keydown", keydownlistener);
+            document.removeEventListener("keyup", keyuplistener);
             setTimeout(function() {
                 gamescreen.innerHTML = "";
                 startscreen = DOMgame.newSpritePiece(gamescreen, 100, 100, 50, 50, "displayscreens.jpg", 100, 400, 0, 0);
