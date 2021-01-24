@@ -1,0 +1,14 @@
+{
+  "name": "escape-velocity",
+  "version": "1.0.0",
+  "description": "A game created by Yikuan Sun",
+  "main": "electron_mainscript.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Yikuan Sun, https://github.com/yikuansun",
+  "devDependencies": {
+    "electron": "^9.2.1",
+    "electron-packager": "^15.1.0"
+  }
+}

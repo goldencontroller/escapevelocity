@@ -1,0 +1,42 @@
+#player {
+    outline: 0.5vmin #00FFFF solid;
+    outline-offset: -0.5vmin;
+    filter: drop-shadow(0 0 0.5vmin #00FFFF) drop-shadow(0 0 1vmin #00FFFF);
+    mix-blend-mode: screen;
+}
+#scope {
+    filter: drop-shadow(0 0 0.5vmin #FF00FF) drop-shadow(0 0 1vmin #FF00FF);
+    mix-blend-mode: screen;
+}
+#scopebox {
+    outline: 0.25vmin #FF00FF solid;
+    outline-offset: -0.125vmin;
+    filter: drop-shadow(0 0 0.5vmin #FF00FF) drop-shadow(0 0 1vmin #FF00FF);
+    mix-blend-mode: screen;
+}
+body { width: 100vw; height: 100vh; margin: 0; cursor: none; background-color: black; }
+#gamescreen { overflow: hidden; z-index: 0; }
+#scrollscreen {
+    background-color: #000505;
+    /*border: 0.5vmin #FFFF00 solid;*/
+}
+#scrollscreen_fake {
+    outline: 0.5vmin #FFFF00 solid;
+    outline-offset: 0vmin;
+    filter: drop-shadow(0 0 0.5vmin #FFFF00) drop-shadow(0 0 1vmin #FFFF00);
+    mix-blend-mode: screen;
+}
+@keyframes fadein {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadeout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes fadeinout {
+    0%   {opacity: 0;}
+    25%  {opacity: 1;}
+    75%  {opacity: 1;}
+    100% {opacity: 0;}
+}

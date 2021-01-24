@@ -1,0 +1,97 @@
+function getcoords(elem) {
+    return [parseFloat(elem.style.left) + parseFloat(elem.style.width) / 2, parseFloat(elem.style.bottom) + parseFloat(elem.style.height) / 2];
+}
+
+keysmap = {};
+
+areyawinningson = false;
+
+velocity_up = 0;
+velocity_right = 0;
+
+scrollscreen = document.createElement("DIV");
+scrollscreen.style.opacity = "0";
+scrollscreen.style.bottom = "47.5vmin"; scrollscreen.style.left = "47.5vmin";
+scrollscreen.style.width = "400vmin"; scrollscreen.style.height = "400vmin";
+scrollscreen.style.position = "absolute";
+scrollscreen.id = "scrollscreen";
+gamescreen.appendChild(scrollscreen);
+scrollscreen_fake = document.createElement("DIV");
+scrollscreen_fake.style.opacity = "0";
+scrollscreen_fake.style.bottom = "47.5vmin"; scrollscreen_fake.style.left = "47.5vmin";
+scrollscreen_fake.style.width = "400vmin"; scrollscreen_fake.style.height = "400vmin";
+scrollscreen_fake.style.position = "absolute";
+scrollscreen_fake.id = "scrollscreen_fake";
+gamescreen.appendChild(scrollscreen_fake);
+
+leftbound = DOMgame.newRectPiece(scrollscreen, 10, 400, -5, 200, "");
+rightbound = DOMgame.newRectPiece(scrollscreen, 10, 400, 405, 200, "");
+topbound = DOMgame.newRectPiece(scrollscreen, 400, 10, 200, 405, "");
+bottombound = DOMgame.newRectPiece(scrollscreen, 400, 10, 200, -5, "");
+rightbound.setAttribute("class", "platform"); leftbound.setAttribute("class", "platform");
+topbound.setAttribute("class", "platform"); bottombound.setAttribute("class", "platform");
+
+player = DOMgame.newRectPiece(scrollscreen, 5, 5, 2.5, 2.5, "");
+player.setAttribute("id", "player");
+
+scope = DOMgame.newImgPiece(scrollscreen, 10, 10, getcoords(player)[0] + 5, getcoords(player)[1] + 5, "scope.png");
+scope.setAttribute("id", "scope");
+scopebox = DOMgame.newRectPiece(scrollscreen, 25, 25, getcoords(player)[0], getcoords(player)[1], "");
+scopebox.setAttribute("id", "scopebox");
+aiming = 1;
+
+build_level();
+
+scrollscreen.style.animation = "fadein 2s";
+scrollscreen_fake.style.animation = "fadein 2s";
+scrollscreen.style.opacity = "1";
+scrollscreen_fake.style.opacity = "1";
+
+function main() {
+
+    if (aiming == 1) {
+        onkeydown = onkeyup = function(e){
+            e = e || event;
+            keysmap[e.keyCode] = e.type == 'keydown';
+        }
+        if (keysmap[38] && getcoords(scope)[1] < getcoords(player)[1] + 12.5) {
+            scope.changeYpos(0.1);
+        }
+        if (keysmap[37] && getcoords(scope)[0] > getcoords(player)[0] - 12.5) {
+            scope.changeXpos(-0.1);
+        }
+        if (keysmap[39] && getcoords(scope)[0] < getcoords(player)[0] + 12.5) {
+            scope.changeXpos(0.1);
+        }
+        if (keysmap[40] && getcoords(scope)[1] > getcoords(player)[1] - 12.5) {
+            scope.changeYpos(-0.1);
+        }
+        if (keysmap[88]) {
+            aiming = 0;
+            velocity_up = (getcoords(scope)[1] - getcoords(player)[1]) / 40;
+            velocity_right = (getcoords(scope)[0] - getcoords(player)[0]) / 90;
+            scopebox.remove();
+            scope.remove();
+            timegap = 0;
+        }
+    }
+    else {
+        if (timegap == 0) {
+            launch_script();
+        }
+    }
+
+    movingplatformsscript();
+
+    scrollscreen.setXpos(250 - getcoords(player)[0]);
+    scrollscreen.setYpos(250 - getcoords(player)[1]);
+    scrollscreen_fake.setXpos(250 - getcoords(player)[0]);
+    scrollscreen_fake.setYpos(250 - getcoords(player)[1]);
+
+    if (areyawinningson) {
+        //win i guess
+    } else {
+        setTimeout(main, 1);
+    }
+}
+main();
